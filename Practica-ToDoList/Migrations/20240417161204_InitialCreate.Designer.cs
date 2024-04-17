@@ -3,15 +3,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Practica_ToDoList.Data;
+using To_Do_List_LC4.Context;
 
 #nullable disable
 
 namespace Practica_ToDoList.Migrations
 {
-    [DbContext(typeof(DataContext))]
-    [Migration("20240417151134_Initial")]
-    partial class Initial
+    [DbContext(typeof(ToDoContext))]
+    [Migration("20240417161204_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,7 +19,7 @@ namespace Practica_ToDoList.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.13");
 
-            modelBuilder.Entity("Practica_ToDoList.Data.Entities.TodoItem", b =>
+            modelBuilder.Entity("To_Do_List_LC4.Data.Entities.ToDoItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -40,12 +40,12 @@ namespace Practica_ToDoList.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("TodoItems");
+                    b.ToTable("ToDoItems");
                 });
 
-            modelBuilder.Entity("Practica_ToDoList.Data.Entities.User", b =>
+            modelBuilder.Entity("To_Do_List_LC4.Data.Entities.User", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -61,15 +61,15 @@ namespace Practica_ToDoList.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Practica_ToDoList.Data.Entities.TodoItem", b =>
+            modelBuilder.Entity("To_Do_List_LC4.Data.Entities.ToDoItem", b =>
                 {
-                    b.HasOne("Practica_ToDoList.Data.Entities.User", "User")
-                        .WithMany("TodoItems")
+                    b.HasOne("To_Do_List_LC4.Data.Entities.User", "User")
+                        .WithMany("ToDoItems")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -77,9 +77,9 @@ namespace Practica_ToDoList.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Practica_ToDoList.Data.Entities.User", b =>
+            modelBuilder.Entity("To_Do_List_LC4.Data.Entities.User", b =>
                 {
-                    b.Navigation("TodoItems");
+                    b.Navigation("ToDoItems");
                 });
 #pragma warning restore 612, 618
         }
