@@ -15,10 +15,8 @@ namespace To_Do_List_LC4.Services
 
         public bool CreateToDoList(ToDoItemDto toDoDto)
         {
-            ToDoItem existingItem = _context.ToDoItems.FirstOrDefault(c => c.Title == toDoDto.Title);
             User existingUser = _context.Users.FirstOrDefault(c => c.Id == toDoDto.UserId);
-
-            if (existingItem == null && existingUser != null)
+            if (existingUser != null)
             {
                 var newItem = new ToDoItem()
                 {
@@ -27,12 +25,16 @@ namespace To_Do_List_LC4.Services
                     Description = toDoDto.Description,
                 };
 
-                _context.ToDoItems.Add(newItem);
+                existingUser.ToDoItems.Add(newItem);
+
                 _context.SaveChanges();
+
                 return true;
             }
             return false;
         }
+
+
 
         public bool EditLists(ToDoItemToEditDto toDoItemToEditDto)
         {

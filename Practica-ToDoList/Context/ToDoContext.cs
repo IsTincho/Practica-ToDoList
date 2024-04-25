@@ -14,11 +14,10 @@ namespace To_Do_List_LC4.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Un usuario puede tener 1 o mas listas, varias listas pueden pertenecer a un usuario.
             modelBuilder.Entity<User>()
                 .HasMany(u => u.ToDoItems)
                 .WithOne(td => td.User)
                 .HasForeignKey(td => td.UserId);
         }
-    } 
+    }
 }

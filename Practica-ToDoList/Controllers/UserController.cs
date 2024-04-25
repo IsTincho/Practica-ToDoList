@@ -34,7 +34,7 @@ namespace To_Do_List_LC4.Controllers
         }
 
         [HttpGet("users/getAllUsers")]
-        public IActionResult GetAllLists()
+        public IActionResult GetAllUsers()
         {
             var users = _userService.GetAllUsers();
             return Ok(users);

@@ -1,4 +1,5 @@
-﻿using To_Do_List_LC4.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using To_Do_List_LC4.Context;
 using To_Do_List_LC4.Data.Dtos;
 using To_Do_List_LC4.Data.Entities;
 using To_Do_List_LC4.Interfaces;
@@ -53,7 +54,7 @@ namespace To_Do_List_LC4.Services
 
         public List<User> GetAllUsers()
         {
-            var users = _context.Users.ToList();
+            var users = _context.Users.Include(u => u.ToDoItems).ToList();
             return users;
         }
     }
